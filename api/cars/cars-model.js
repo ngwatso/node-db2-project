@@ -16,3 +16,9 @@ async const create = (newCar) => {
 const cars = await db('cars').insert(newCar)
 return getById(cars[0])
 }
+
+// TODO PUT
+
+// TODO DELETE
+
+module.exports = { getAll, getById, create }
