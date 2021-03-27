@@ -1,4 +1,3 @@
-const { insert } = require('../../data/db-config');
 const db = require('../../data/db-config');
 
 const getAll = () => {
@@ -11,14 +10,14 @@ const getById = (id) => {
 	return db('cars').first('*').where({ id });
 };
 
-async const create = (newCar) => {
+const create = async (newCar) => {
 	// !! DO YOUR MAGIC
-const cars = await db('cars').insert(newCar)
-return getById(cars[0])
-}
+	const cars = await db('cars').insert(newCar);
+	return getById(cars[0]);
+};
 
 // TODO PUT
 
 // TODO DELETE
 
-module.exports = { getAll, getById, create }
+module.exports = { getAll, getById, create };

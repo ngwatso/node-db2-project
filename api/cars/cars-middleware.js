@@ -36,14 +36,13 @@ const checkCarPayload = (req, res, next) => {
 	} else if (!newCar.milage) {
 		next({ ...Error(), status: 400, message: `Car milage is missing` });
 	} else {
-		res.status(200).json(newCar);
 		next();
 	}
 };
 
-const checkVinNumberValid = (req, res, next) => {
+const checkVinNumberValid = async (req, res, next) => {
 	// !! DO YOUR MAGIC
-	var isValidVin = vinValidator.validate(`${req.params.vin}`);
+	var isValidVin = await vinValidator.validate(`${req.params.vin}`);
 	if (isValidVin === false) {
 		next({
 			...Error(),
@@ -55,9 +54,9 @@ const checkVinNumberValid = (req, res, next) => {
 	}
 };
 
-const checkVinNumberUnique = (req, res, next) => {
+const checkVinNumberUnique = async (req, res, next) => {
 	// !! DO YOUR MAGIC
-	const vin = Cars.getAll(req.params.vin);
+	const vin = await Cars.getAll(req.params.vin);
 	if (vin) {
 		next({
 			...Error,
