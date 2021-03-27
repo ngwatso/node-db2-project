@@ -42,12 +42,12 @@ const checkCarPayload = (req, res, next) => {
 
 const checkVinNumberValid = async (req, res, next) => {
 	// !! DO YOUR MAGIC
-	var isValidVin = await vinValidator.validate(`${req.params.vin}`);
+	var isValidVin = await vinValidator.validate(`${req.body.vin}`);
 	if (isValidVin === false) {
 		next({
 			...Error(),
 			status: 400,
-			message: `vin ${req.params.vin} is invalid`,
+			message: `vin ${req.body.vin} is invalid`,
 		});
 	} else {
 		next();
@@ -56,12 +56,17 @@ const checkVinNumberValid = async (req, res, next) => {
 
 const checkVinNumberUnique = async (req, res, next) => {
 	// !! DO YOUR MAGIC
-	const vin = await Cars.getAll(req.params.vin);
-	if (vin) {
+	const vin = await Cars.getAll();
+	if (
+		req.body.vin ===
+		vin.forEach((car) => {
+			return car.vin;
+		})
+	) {
 		next({
 			...Error,
 			status: 400,
-			messgage: `vin ${req.params.vin} already exists`,
+			messgage: `vin ${req.body.vin} already exists`,
 		});
 	} else {
 		next();

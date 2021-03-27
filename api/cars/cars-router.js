@@ -28,8 +28,8 @@ CarsRouter.get('/:id', Middleware.checkCarId, (req, res) => {
 CarsRouter.post(
 	'/',
 	Middleware.checkCarPayload,
-	// Middleware.checkVinNumberValid,
 	Middleware.checkVinNumberUnique,
+	Middleware.checkVinNumberValid,
 	async (req, res) => {
 		const newCar = await Cars.create(req.body);
 		res.status(200).json(newCar);
