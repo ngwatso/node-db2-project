@@ -54,28 +54,28 @@ const checkVinNumberValid = async (req, res, next) => {
 	}
 };
 
-const checkVinNumberUnique = async (req, res, next) => {
-	// !! DO YOUR MAGIC
-	const vin = await Cars.getAll();
-	if (
-		req.body.vin ===
-		vin.forEach((car) => {
-			return car.vin;
-		})
-	) {
-		next({
-			...Error,
-			status: 400,
-			messgage: `vin ${req.body.vin} already exists`,
-		});
-	} else {
-		next();
-	}
-};
+// const checkVinNumberUnique = async (req, res, next) => {
+// 	// !! DO YOUR MAGIC
+// 	const vin = await Cars.getAll();
+// 	if (
+// 		req.body.vin ===
+// 		vin.forEach((car) => {
+// 			return car.vin;
+// 		})
+// 	) {
+// 		next({
+// 			...Error,
+// 			status: 400,
+// 			messgage: `vin ${req.body.vin} already exists`,
+// 		});
+// 	} else {
+// 		next();
+// 	}
+// };
 
 module.exports = {
 	checkCarId,
 	checkCarPayload,
 	checkVinNumberValid,
-	checkVinNumberUnique,
+	// checkVinNumberUnique,
 };
